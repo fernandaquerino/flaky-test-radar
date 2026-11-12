@@ -29,11 +29,19 @@ beforeAll(async () => {
   process.env.ADMIN_PASSWORD_HASH = hashPassword('integration-password');
   process.env.SESSION_SECRET =
     'integration-session-secret-at-least-32-characters';
+  process.env.RADAR_QUEUE_PREFIX = `integration-${randomUUID()}`;
   app = await createApp();
   db = app.get(Database);
 });
 afterAll(async () => {
-  if (db) await db.project.deleteMany({ where: { slug } });
+  if (db) {
+    const uploads = await db.upload.findMany({ where: { project: { slug } } });
+    for (const upload of uploads) {
+      const job = await app.get(UploadQueue).queue.getJob(upload.id);
+      await job?.remove();
+    }
+    await db.project.deleteMany({ where: { slug } });
+  }
   if (app) await app.close();
 });
 describe('API with real PostgreSQL and Redis', () => {
@@ -62,7 +70,9 @@ describe('API with real PostgreSQL and Redis', () => {
       .post('/api/auth/login')
       .send({ password: 'integration-password' })
       .expect(200);
-    cookie = login.headers['set-cookie'][0] as string;
+    const cookies = login.headers['set-cookie'];
+    if (!cookies?.[0]) throw new Error('Missing session cookie');
+    cookie = cookies[0];
     expect(cookie).toContain('HttpOnly');
     expect(cookie).toContain('SameSite=Strict');
     await request(app.getHttpServer())

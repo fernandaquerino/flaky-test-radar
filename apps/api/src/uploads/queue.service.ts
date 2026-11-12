@@ -10,6 +10,7 @@ import { Database } from '../database';
 @Injectable()
 export class UploadQueue implements OnModuleInit, OnModuleDestroy {
   readonly queue = new Queue(UPLOAD_QUEUE, {
+    prefix: process.env.RADAR_QUEUE_PREFIX ?? 'radar',
     connection: {
       ...redisConnection(process.env.REDIS_URL ?? 'redis://localhost:6379'),
       maxRetriesPerRequest: 1,

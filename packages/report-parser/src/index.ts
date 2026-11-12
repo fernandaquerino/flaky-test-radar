@@ -65,10 +65,10 @@ export function parseReport(input: unknown) {
           const executed = [previous.outcome, row.outcome].filter(
             (o) => o !== 'skipped',
           );
-          row.outcome =
-            executed.includes('flaky') ||
-            (executed.includes('passed') && executed.includes('failed'))
-              ? 'flaky'
+          row.outcome = executed.includes('flaky')
+            ? 'flaky'
+            : executed.includes('failed')
+              ? 'failed'
               : (executed[0] ?? 'skipped');
           row.retries += previous.retries;
           row.durationMs += previous.durationMs;

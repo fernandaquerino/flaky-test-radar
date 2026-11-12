@@ -32,9 +32,11 @@ class Consumer implements OnModuleDestroy {
         process.env.REDIS_URL ?? 'redis://localhost:6379',
       ),
       concurrency: 4,
+      prefix: process.env.RADAR_QUEUE_PREFIX ?? 'radar',
     },
   );
   constructor() {
+    this.worker.on('ready', () => console.log('Worker ready'));
     this.worker.on('error', () =>
       console.error('Worker connection error; reconnecting.'),
     );

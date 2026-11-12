@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "pnpm -r build",
-    "typecheck": "pnpm --filter \"./packages/*\" build && pnpm -r typecheck",
+    "typecheck": "pnpm --filter \"./packages/*\" build && pnpm -r typecheck && tsc --noEmit",
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
     "test": "vitest run",
@@ -17,7 +17,8 @@
     "db:migrate": "prisma migrate deploy",
     "db:seed": "tsx prisma/seed.ts",
     "fixtures": "tsx scripts/generate-fixtures.ts",
-    "auth:hash": "tsx scripts/hash-password.ts"
+    "auth:hash": "tsx scripts/hash-password.ts",
+    "test:e2e": "playwright test"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
