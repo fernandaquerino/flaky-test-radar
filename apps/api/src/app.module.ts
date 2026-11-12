@@ -1,3 +1,5 @@
+import { QueriesController } from './queries/queries.controller';
+import { QueriesService } from './queries/queries.service';
 import { Controller, Get, Module } from '@nestjs/common';
 import { Database } from './database';
 import { AuthService } from './auth/auth.service';
@@ -16,12 +18,14 @@ class HealthController {
 }
 @Module({
   controllers: [
+    QueriesController,
     HealthController,
     AuthController,
     ProjectsController,
     UploadsController,
   ],
   providers: [
+    QueriesService,
     Database,
     AuthService,
     AdminGuard,

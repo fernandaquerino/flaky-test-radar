@@ -47,6 +47,9 @@ importers:
 
   apps/api:
     dependencies:
+      '@flaky-radar/database':
+        specifier: workspace:*
+        version: link:../../packages/database
       '@flaky-radar/shared':
         specifier: workspace:*
         version: link:../../packages/shared
