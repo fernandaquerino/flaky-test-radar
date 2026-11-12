@@ -1,0 +1,466 @@
+{
+  "config": {
+    "argv": [
+      "/private/tmp/flaky-radar-tools/node_modules/node/bin/node",
+      "/sample/flaky-test-radar/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "examples/playwright.config.ts"
+    ],
+    "configFile": "/sample/flaky-test-radar/examples/playwright.config.ts",
+    "rootDir": "/sample/flaky-test-radar/examples/sample-tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/sample/flaky-test-radar/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/sample/flaky-test-radar/examples/sample-tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 1000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/sample/flaky-test-radar/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "chromium",
+        "testDir": "/sample/flaky-test-radar/examples/sample-tests",
+        "snapshotDir": "/sample/flaky-test-radar/examples/sample-tests",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 1000,
+        "use": {},
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json",
+        {
+          "outputFile": "/sample/flaky-test-radar/packages/report-parser/fixtures/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "outcomes.spec.ts",
+      "file": "outcomes.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "sample checkout",
+          "file": "outcomes.spec.ts",
+          "line": 2,
+          "column": 6,
+          "specs": [
+            {
+              "title": "passes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 1000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-12T11:52:51.436Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bac7195f1102b9e735ec-a85353b9e20639f3981b",
+              "file": "outcomes.spec.ts",
+              "line": 3,
+              "column": 3
+            },
+            {
+              "title": "flaky on first attempt",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 1000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n    at /sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts:8:24",
+                        "location": {
+                          "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                          "column": 24,
+                          "line": 8
+                        },
+                        "snippet": " \u001b[90m  6 |\u001b[39m   test(\u001b[32m'flaky on first attempt'\u001b[39m\u001b[33m,\u001b[39m ({ browserName }\u001b[33m,\u001b[39m info) \u001b[33m=>\u001b[39m {\n \u001b[90m  7 |\u001b[39m     expect(browserName)\u001b[33m.\u001b[39mtoBe(\u001b[32m'chromium'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  8 |\u001b[39m     expect(info\u001b[33m.\u001b[39mretry)\u001b[33m.\u001b[39mtoBe(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m  9 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 10 |\u001b[39m   test(\u001b[32m'fails every attempt'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n \u001b[90m 11 |\u001b[39m     expect(\u001b[32m'pending'\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[32m'complete'\u001b[39m)\u001b[33m;\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                            "column": 24,
+                            "line": 8
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\n   6 |   test('flaky on first attempt', ({ browserName }, info) => {\n   7 |     expect(browserName).toBe('chromium');\n>  8 |     expect(info.retry).toBe(1);\n     |                        ^\n   9 |   });\n  10 |   test('fails every attempt', () => {\n  11 |     expect('pending').toBe('complete');\n    at /sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts:8:24"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-12T11:52:51.474Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/sample/flaky-test-radar/test-results/outcomes-sample-checkout-flaky-on-first-attempt-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                        "column": 24,
+                        "line": 8
+                      }
+                    },
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-11-12T11:52:51.795Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "flaky"
+                }
+              ],
+              "id": "bac7195f1102b9e735ec-97d08e8af59f4f89daf6",
+              "file": "outcomes.spec.ts",
+              "line": 6,
+              "column": 3
+            },
+            {
+              "title": "fails every attempt",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 1000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"complete\"\u001b[39m\nReceived: \u001b[31m\"pending\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"complete\"\u001b[39m\nReceived: \u001b[31m\"pending\"\u001b[39m\n    at /sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts:11:23",
+                        "location": {
+                          "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                          "column": 23,
+                          "line": 11
+                        },
+                        "snippet": " \u001b[90m  9 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 10 |\u001b[39m   test(\u001b[32m'fails every attempt'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 11 |\u001b[39m     expect(\u001b[32m'pending'\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[32m'complete'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                       \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 12 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 13 |\u001b[39m   test(\u001b[32m'skipped'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n \u001b[90m 14 |\u001b[39m     test\u001b[33m.\u001b[39mskip()\u001b[33m;\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                            "column": 23,
+                            "line": 11
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"complete\"\u001b[39m\nReceived: \u001b[31m\"pending\"\u001b[39m\n\n   9 |   });\n  10 |   test('fails every attempt', () => {\n> 11 |     expect('pending').toBe('complete');\n     |                       ^\n  12 |   });\n  13 |   test('skipped', () => {\n  14 |     test.skip();\n    at /sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts:11:23"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-12T11:52:51.852Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/sample/flaky-test-radar/test-results/outcomes-sample-checkout-fails-every-attempt-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                        "column": 23,
+                        "line": 11
+                      }
+                    },
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 6,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"complete\"\u001b[39m\nReceived: \u001b[31m\"pending\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"complete\"\u001b[39m\nReceived: \u001b[31m\"pending\"\u001b[39m\n    at /sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts:11:23",
+                        "location": {
+                          "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                          "column": 23,
+                          "line": 11
+                        },
+                        "snippet": " \u001b[90m  9 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 10 |\u001b[39m   test(\u001b[32m'fails every attempt'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 11 |\u001b[39m     expect(\u001b[32m'pending'\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[32m'complete'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                       \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 12 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 13 |\u001b[39m   test(\u001b[32m'skipped'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n \u001b[90m 14 |\u001b[39m     test\u001b[33m.\u001b[39mskip()\u001b[33m;\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                            "column": 23,
+                            "line": 11
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"complete\"\u001b[39m\nReceived: \u001b[31m\"pending\"\u001b[39m\n\n   9 |   });\n  10 |   test('fails every attempt', () => {\n> 11 |     expect('pending').toBe('complete');\n     |                       ^\n  12 |   });\n  13 |   test('skipped', () => {\n  14 |     test.skip();\n    at /sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts:11:23"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-11-12T11:52:52.078Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/sample/flaky-test-radar/test-results/outcomes-sample-checkout-fails-every-attempt-chromium-retry1/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                        "column": 23,
+                        "line": 11
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "bac7195f1102b9e735ec-f626200c9cb05471a31e",
+              "file": "outcomes.spec.ts",
+              "line": 10,
+              "column": 3
+            },
+            {
+              "title": "skipped",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 1000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "location": {
+                        "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                        "line": 14,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 3,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-12T11:52:52.348Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "location": {
+                            "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                            "line": 14,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "bac7195f1102b9e735ec-3ae5f30c0ef25a6c0f0b",
+              "file": "outcomes.spec.ts",
+              "line": 13,
+              "column": 3
+            },
+            {
+              "title": "expected failure",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 1000,
+                  "annotations": [
+                    {
+                      "type": "fail",
+                      "location": {
+                        "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                        "line": 17,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "expectedStatus": "failed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 9,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts:18:19",
+                        "location": {
+                          "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                          "column": 19,
+                          "line": 18
+                        },
+                        "snippet": " \u001b[90m 16 |\u001b[39m   test(\u001b[32m'expected failure'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n \u001b[90m 17 |\u001b[39m     test\u001b[33m.\u001b[39mfail()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 18 |\u001b[39m     expect(\u001b[36mfalse\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 19 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 20 |\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 21 |\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                            "column": 19,
+                            "line": 18
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  16 |   test('expected failure', () => {\n  17 |     test.fail();\n> 18 |     expect(false).toBe(true);\n     |                   ^\n  19 |   });\n  20 | });\n  21 |\n    at /sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts:18:19"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-12T11:52:52.412Z",
+                      "annotations": [
+                        {
+                          "type": "fail",
+                          "location": {
+                            "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                            "line": 17,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/sample/flaky-test-radar/test-results/outcomes-sample-checkout-expected-failure-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/sample/flaky-test-radar/examples/sample-tests/outcomes.spec.ts",
+                        "column": 19,
+                        "line": 18
+                      }
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bac7195f1102b9e735ec-e2ca8e806bc18d79a27a",
+              "file": "outcomes.spec.ts",
+              "line": 16,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-12T11:52:51.124Z",
+    "duration": 1338.202,
+    "expected": 2,
+    "skipped": 1,
+    "unexpected": 1,
+    "flaky": 1
+  }
+}
