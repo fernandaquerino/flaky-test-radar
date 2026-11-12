@@ -133,7 +133,11 @@ importers:
         specifier: ^7.8.2
         version: 7.8.2
 
-  packages/cli: {}
+  packages/cli:
+    dependencies:
+      '@flaky-radar/shared':
+        specifier: workspace:*
+        version: link:../shared
 
   packages/database:
     dependencies:
