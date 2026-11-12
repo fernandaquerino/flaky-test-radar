@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+enum UploadStatus {
+  RECEIVED
+  PROCESSED
+  FAILED
+}
+enum Outcome {
+  passed
+  failed
+  flaky
+  skipped
+}
+model Project {
+  id String @id @default(cuid())
+  name String
+  slug String @unique
+  createdAt DateTime @default(now())
+  tokens ApiToken[]
+  uploads Upload[]
+  tests TestCase[]
+  runs TestRun[]
+}
+model ApiToken {
+  id String @id @default(cuid())
+  projectId String
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  tokenHash String @unique
+  label String
+  createdAt DateTime @default(now())
+  lastUsedAt DateTime?
+  revokedAt DateTime?
+  @@index([projectId])
+}
+model Upload {
+  id String @id @default(cuid())
+  projectId String
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  ciRunId String
+  attempt Int
+  commitSha String
+  branch String
+  status UploadStatus @default(RECEIVED)
+  rawReport Json @db.JsonB
+  error String?
+  createdAt DateTime @default(now())
+  run TestRun?
+  @@unique([projectId, ciRunId, attempt])
+  @@index([status, createdAt])
+  @@index([projectId, createdAt])
+}
+model TestCase {
+  id String @id @default(cuid())
+  projectId String
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  fileName String
+  titlePath String[]
+  playwrightProject String
+  stableKey String
+  results TestResult[]
+  dailyStats DailyTestStat[]
+  @@unique([projectId, stableKey])
+}
+model TestRun {
+  id String @id @default(cuid())
+  projectId String
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  uploadId String @unique
+  upload Upload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  commitSha String
+  branch String
+  startedAt DateTime
+  durationMs Int
+  results TestResult[]
+  @@index([projectId, startedAt])
+  @@index([projectId, commitSha])
+}
+model TestResult {
+  id String @id @default(cuid())
+  testRunId String
+  testRun TestRun @relation(fields: [testRunId], references: [id], onDelete: Cascade)
+  testCaseId String
+  testCase TestCase @relation(fields: [testCaseId], references: [id], onDelete: Cascade)
+  outcome Outcome
+  retries Int
+  durationMs Int
+  errorMessage String? @db.VarChar(2048)
+  @@unique([testCaseId, testRunId])
+}
+model DailyTestStat {
+  testCaseId String
+  testCase TestCase @relation(fields: [testCaseId], references: [id], onDelete: Cascade)
+  day DateTime @db.Date
+  executions Int
+  flakyCount Int
+  failedCount Int
+  @@id([testCaseId, day])
+}
