@@ -1,0 +1,41 @@
+# Copy into a consuming Playwright repository. This example assumes pnpm.
+# Set FLAKY_RADAR_URL and FLAKY_RADAR_TOKEN as repository secrets.
+# The pinned Radar revision must be pushed before this workflow can fetch it.
+name: Playwright with Flaky Test Radar
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.32.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Check out the unpublished Radar CLI
+        uses: actions/checkout@v4
+        with:
+          repository: fernandaquerino/flaky-test-radar
+          ref: 9e0af20b8f0b2aa264c107335975173f4b3254a4
+          path: .radar
+          persist-credentials: false
+      - name: Build Radar CLI
+        run: |
+          pnpm --dir .radar install --frozen-lockfile
+          pnpm --dir .radar --filter '@flaky-radar/cli...' build
+      - name: Run Playwright
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_FILE: results.json
+        run: pnpm exec playwright test --reporter=list,json --retries=2
+      - name: Upload test results
+        if: always()
+        env:
+          FLAKY_RADAR_URL: ${{ secrets.FLAKY_RADAR_URL }}
+          FLAKY_RADAR_TOKEN: ${{ secrets.FLAKY_RADAR_TOKEN }}
+        run: node .radar/packages/cli/dist/index.js upload --report results.json --soft-fail

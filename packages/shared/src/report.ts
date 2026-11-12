@@ -39,12 +39,14 @@ export interface ReportSuite {
   suites?: ReportSuite[];
 }
 const suite: z.ZodType<ReportSuite> = z.lazy(() =>
-  z.object({
-    title: z.string(),
-    file: z.string().optional(),
-    specs: z.array(spec),
-    suites: z.array(suite).optional(),
-  }),
+  z
+    .object({
+      title: z.string(),
+      file: z.string().optional(),
+      specs: z.array(spec),
+      suites: z.array(suite).optional(),
+    })
+    .passthrough(),
 );
 export const reportSchema = z
   .object({

@@ -18,7 +18,14 @@
     "db:seed": "tsx prisma/seed.ts",
     "fixtures": "tsx scripts/generate-fixtures.ts",
     "auth:hash": "tsx scripts/hash-password.ts",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "build:packages": "pnpm --filter \"./packages/*\" build",
+    "start:api": "node apps/api/dist/main.js",
+    "start:worker": "node apps/worker/dist/main.js",
+    "start:web": "pnpm --filter @flaky-radar/web start",
+    "dev:api": "tsx watch --tsconfig tsconfig.base.json apps/api/src/main.ts",
+    "dev:worker": "tsx watch --tsconfig tsconfig.base.json apps/worker/src/main.ts",
+    "dev:web": "pnpm --filter @flaky-radar/web dev"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
